@@ -5,7 +5,6 @@
 /build
 /captures
 /.idea
-*.png
 gradle.properties
 *.apk
 /gradle

@@ -124,7 +124,7 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text=" CVE-2016-8467 INFO "
+        android:text="  CVE-2016-8467 INFO  "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
