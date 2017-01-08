@@ -89,7 +89,7 @@ public class BootmodeActivity extends AppCompatActivity {
 
         TextView bm = (TextView) findViewById(R.id.textBootmodeAttack);
 
-        if (!"".equals(bootMode) && !normalBootmode.equals(bootmode))
+        if (!"".equals(bootmode) && !normalBootmode.equals(bootmode))
         {
             bm.setText(LABEL_ATTACK);
         }
