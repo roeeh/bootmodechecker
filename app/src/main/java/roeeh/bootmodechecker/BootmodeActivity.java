@@ -101,7 +101,7 @@ public class BootmodeActivity extends AppCompatActivity {
              @Override
              public void onClick(View view) {
 
-                 Intent i = new Intent();
+                 Intent i = new Intent(Intent.ACTION_VIEW);
                  i.setData(Uri.parse(BLOG));
                  startActivity(i);
              }
