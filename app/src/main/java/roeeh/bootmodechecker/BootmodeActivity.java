@@ -21,7 +21,8 @@ import java.lang.reflect.Field;
         BootmodeChecker / Roee Hay (@roeehay)
 
         CVE-2016-8467 checker.
-        BootmodeChecker detects whether your Nexus 6/6P device is vulnerable or patched, and if the bootmode system property has been tampered with, which may indicate that the device is under attack.
+        BootmodeChecker detects whether your Nexus 6/6P device is vulnerable or patched, and if the bootmode system property
+        has been tampered with, which may indicate that the device is under attack.
 
         More info about the vulnerability is available here:
         1. Blog post: https://securityintelligence.com/android-vulnerabilities-attacking-nexus-6-and-6p-custom-boot-modes/
@@ -40,6 +41,11 @@ public class BootmodeActivity extends AppCompatActivity {
     final static String LABEL_VULN = "VULNERABLE";
     final static String LABEL_ATTACK = "BOOTMODE TAMPERED";
 
+    final static int COLOR_RED = Color.rgb(0xcc,0x00,0x00);
+    final static int COLOR_GREEN = Color.rgb(0x66,0x99,0);
+
+    final static String PATCH_DATE_SHAMU  = "2016-11-05";
+    final static String PATCH_DATE_ANGLER = "2017-01-05";
     final static String BLOG = "https://securityresear.ch/2017/01/05/attacking-android-custom-bootmodes/";
 
     final static String bootmode = getProperty("ro.boot.mode", "");
@@ -47,12 +53,9 @@ public class BootmodeActivity extends AppCompatActivity {
     final static boolean angler = Build.DEVICE.equals("angler");
     final static String patch = getSecurityPatchLevel("unknown");
     final static String normalBootmode = "normal";
-    final static int COLOR_RED = Color.rgb(0xcc,0x00,0x00);
-    final static int COLOR_GREEN = Color.rgb(0x66,0x99,0);
+
 
     final String TAG = this.getClass().getSimpleName();
-    boolean deviceShamu;
-    boolean deviceAngler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,7 @@ public class BootmodeActivity extends AppCompatActivity {
             bm.setText(LABEL_ATTACK);
         }
 
-        vuln.setTextColor(isVulnerable() ? Color.rgb(0xcc,0x00,0x00) : Color.rgb(0x66,0x99,0));
+        vuln.setTextColor(isVulnerable() ? COLOR_RED : COLOR_GREEN);
 
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -107,16 +110,10 @@ public class BootmodeActivity extends AppCompatActivity {
 
     }
 
-    private static boolean isVulnerable()
-    {
-        if (shamu)
-        {
-            return isPatchLevelBefore("2016-11-05");
-        }
-        if (angler)
-        {
-            return isPatchLevelBefore("2017-01-05");
-        }
+    private static boolean isVulnerable() {
+        if (shamu)  return isPatchLevelBefore(PATCH_DATE_SHAMU);
+        if (angler) return isPatchLevelBefore(PATCH_DATE_ANGLER);
+
         return false;
     }
 
